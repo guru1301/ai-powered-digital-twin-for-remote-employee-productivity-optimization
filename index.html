@@ -7,6 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
 </head>
 <body>
@@ -248,8 +249,7 @@
                         </div>
                     </div>
                     <div class="productivity-chart">
-                        <!-- Chart will be rendered here - in a real implementation, you'd use a JS chart library -->
-                        <img src="/api/placeholder/800/300" alt="Productivity chart placeholder" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--border-radius);">
+                        <canvas id="productivityChart"></canvas>
                     </div>
                 </div>
                 
@@ -302,7 +302,58 @@
                     </div>
                 </div>
             </div>
-            
+            <!-- Add this section after the Team Performance section -->
+<div class="chart-row">
+    <div class="chart-container">
+        <div class="chart-header">
+            <h3>Task Completion Status</h3>
+        </div>
+        <div class="task-completion-chart">
+            <canvas id="taskCompletionChart"></canvas>
+        </div>
+    </div>
+    
+    <!-- This is a placeholder for something else you might want to add -->
+    <div class="chart-container">
+        <div class="chart-header">
+            <h3>Weekly Progress</h3>
+        </div>
+        <div class="weekly-progress">
+            <div class="progress-item">
+                <div class="progress-label">Tasks Completed</div>
+                <div class="progress-bar">
+                    <div class="progress-value" style="width: 75%;">75%</div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-label">Sprint Goals</div>
+                <div class="progress-bar">
+                    <div class="progress-value" style="width: 60%;">60%</div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-label">Bugs Fixed</div>
+                <div class="progress-bar">
+                    <div class="progress-value" style="width: 85%;">85%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- Add this section before the Team Section -->
+<div class="chart-container full-width">
+    <div class="chart-header">
+        <h3>Team Performance Metrics</h3>
+        <div class="chart-filters">
+            <button class="chart-filter-btn active">Focus Time</button>
+            <button class="chart-filter-btn">Burnout Risk</button>
+            <button class="chart-filter-btn">Engagement</button>
+        </div>
+    </div>
+    <div class="team-metrics-chart">
+        <canvas id="teamMetricsChart"></canvas>
+    </div>
+</div>
             <!-- Team Section -->
             <div class="team-section">
                 <div class="section-header">
@@ -378,23 +429,264 @@
     <!-- You would include JavaScript libraries here for charts and interactivity -->
     <script>
         // Sample JavaScript for simple interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Filter buttons
-            const filterButtons = document.querySelectorAll('.chart-filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const parent = this.parentElement;
-                    parent.querySelector('.active').classList.remove('active');
-                    this.classList.add('active');
-                });
-            });
-            
-            // Notification interaction
-            const notificationBell = document.querySelector('.notification-bell');
-            notificationBell.addEventListener('click', function() {
-                alert('Notification center would open here');
-            });
-        });
+       // Add this to your existing script section or create a new one at the end of the body
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the canvas element
+    const productivityCanvas = document.getElementById('productivityChart');
+    
+    // Sample data for the chart
+    const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const productivityData = [65, 72, 78, 75, 82, 68, 70];
+    
+    // Create the chart
+    const productivityChart = new Chart(productivityCanvas, {
+        type: 'line', // This creates a line chart
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Team Productivity Score',
+                data: productivityData,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Light blue background
+                borderColor: 'rgba(54, 162, 235, 1)', // Blue line
+                borderWidth: 2,
+                tension: 0.4, // Makes the line curved
+                fill: true, // Fill area under the line
+                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true, // Makes the chart responsive
+            maintainAspectRatio: false, // Lets you control the height
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    min: 50, // Start from 50%
+                    max: 100, // End at 100%
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%'; // Add percentage sign
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Productivity (%)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Day of Week'
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return 'Productivity: ' + context.parsed.y + '%';
+                        }
+                    }
+                },
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+    
+    // Make the chart filters work
+    const weekFilterBtn = document.querySelector('.chart-filters .chart-filter-btn:nth-child(1)');
+    const monthFilterBtn = document.querySelector('.chart-filters .chart-filter-btn:nth-child(2)');
+    const quarterFilterBtn = document.querySelector('.chart-filters .chart-filter-btn:nth-child(3)');
+    
+    weekFilterBtn.addEventListener('click', function() {
+        productivityChart.data.labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        productivityChart.data.datasets[0].data = [65, 72, 78, 75, 82, 68, 70];
+        productivityChart.update();
+    });
+    
+    monthFilterBtn.addEventListener('click', function() {
+        productivityChart.data.labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+        productivityChart.data.datasets[0].data = [70, 75, 78, 82];
+        productivityChart.update();
+    });
+    
+    quarterFilterBtn.addEventListener('click', function() {
+        productivityChart.data.labels = ['January', 'February', 'March'];
+        productivityChart.data.datasets[0].data = [68, 75, 80];
+        productivityChart.update();
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // Team metrics chart
+    const teamMetricsCanvas = document.getElementById('teamMetricsChart');
+    
+    // Sample data
+    const teamMembers = ['Michael', 'Pam', 'Jim', 'Dwight', 'Kevin', 'Angela'];
+    
+    // Different metrics data
+    const focusTimeData = [6.2, 5.8, 4.5, 3.8, 4.2, 5.5];
+    const burnoutRiskData = [8, 12, 18, 35, 25, 10];
+    const engagementData = [85, 78, 72, 65, 70, 82];
+    
+    // Create bar chart
+    const teamMetricsChart = new Chart(teamMetricsCanvas, {
+        type: 'bar',
+        data: {
+            labels: teamMembers,
+            datasets: [{
+                label: 'Focus Time (hours)',
+                data: focusTimeData,
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Hours'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Team Members'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+    
+    // Make the filters work
+    const focusBtn = document.querySelector('.team-metrics-chart').previousElementSibling.querySelector('.chart-filter-btn:nth-child(1)');
+    const burnoutBtn = document.querySelector('.team-metrics-chart').previousElementSibling.querySelector('.chart-filter-btn:nth-child(2)');
+    const engagementBtn = document.querySelector('.team-metrics-chart').previousElementSibling.querySelector('.chart-filter-btn:nth-child(3)');
+    
+    focusBtn.addEventListener('click', function() {
+        teamMetricsChart.data.datasets[0].label = 'Focus Time (hours)';
+        teamMetricsChart.data.datasets[0].data = focusTimeData;
+        teamMetricsChart.data.datasets[0].backgroundColor = 'rgba(75, 192, 192, 0.7)';
+        teamMetricsChart.data.datasets[0].borderColor = 'rgba(75, 192, 192, 1)';
+        teamMetricsChart.options.scales.y.title.text = 'Hours';
+        teamMetricsChart.update();
+    });
+    
+    burnoutBtn.addEventListener('click', function() {
+        teamMetricsChart.data.datasets[0].label = 'Burnout Risk (%)';
+        teamMetricsChart.data.datasets[0].data = burnoutRiskData;
+        teamMetricsChart.data.datasets[0].backgroundColor = 'rgba(255, 99, 132, 0.7)';
+        teamMetricsChart.data.datasets[0].borderColor = 'rgba(255, 99, 132, 1)';
+        teamMetricsChart.options.scales.y.title.text = 'Risk (%)';
+        teamMetricsChart.update();
+    });
+    
+    engagementBtn.addEventListener('click', function() {
+        teamMetricsChart.data.datasets[0].label = 'Engagement (%)';
+        teamMetricsChart.data.datasets[0].data = engagementData;
+        teamMetricsChart.data.datasets[0].backgroundColor = 'rgba(153, 102, 255, 0.7)';
+        teamMetricsChart.data.datasets[0].borderColor = 'rgba(153, 102, 255, 1)';
+        teamMetricsChart.options.scales.y.title.text = 'Engagement (%)';
+        teamMetricsChart.update();
+    });
+});
+// Add this to your existing script section
+document.addEventListener('DOMContentLoaded', function() {
+    // Task completion doughnut chart
+    const taskCompletionCanvas = document.getElementById('taskCompletionChart');
+    
+    const taskCompletionChart = new Chart(taskCompletionCanvas, {
+        type: 'doughnut',
+        data: {
+            labels: ['Completed', 'In Progress', 'Not Started', 'Blocked'],
+            datasets: [{
+                data: [65, 15, 10, 10],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.7)',  // Teal for completed
+                    'rgba(54, 162, 235, 0.7)',  // Blue for in progress
+                    'rgba(255, 205, 86, 0.7)',  // Yellow for not started
+                    'rgba(255, 99, 132, 0.7)'   // Red for blocked
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.parsed + '%';
+                        }
+                    }
+                }
+            },
+            cutout: '65%' // This makes the doughnut hole larger
+        }
+    });
+    
+    // Add additional CSS for the task completion chart
+    const style = document.createElement('style');
+    style.textContent = `
+        .task-completion-chart {
+            height: 250px;
+            position: relative;
+        }
+        
+        .weekly-progress {
+            padding: 15px;
+        }
+        
+        .progress-item {
+            margin-bottom: 20px;
+        }
+        
+        .progress-label {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-value {
+            height: 100%;
+            background-color: #4caf50;
+            border-radius: 10px;
+            text-align: right;
+            padding-right: 5px;
+            font-size: 10px;
+            color: white;
+            line-height: 10px;
+        }
+    `;
+    document.head.appendChild(style);
+});
     </script>
 </body>
 </html>
