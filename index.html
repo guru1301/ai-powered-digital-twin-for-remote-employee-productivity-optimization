@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Digital Twin - Employee Monitoring Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-brain"></i> <span>Digital Twin</span></h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+                <li><a href="#"><i class="fas fa-users"></i> <span>Team</span></a></li>
+                <li><a href="#"><i class="fas fa-robot"></i> <span>Digital Twins</span></a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> <span>Schedule</span></a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> <span>Reports</span></a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.85rem;">
+                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="user-profile">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="avatar">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Team Dashboard</h2>
+            <p style="margin-bottom: 30px; color: var(--neutral-dark);">Monitor your team's productivity and performance</p>
+            
+            <!-- Dashboard Cards -->
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Team Productivity</h3>
+                        <div class="card-icon primary">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                    </div>
+                    <div class="card-value">78%</div>
+                    <div class="card-change positive">
+                        <i class="fas fa-arrow-up"></i> 4.2% from last week
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Focus Time</h3>
+                        <div class="card-icon success">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                    <div class="card-value">5.3h</div>
+                    <div class="card-change positive">
+                        <i class="fas fa-arrow-up"></i> 0.8h from last week
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Burnout Risk</h3>
+                        <div class="card-icon warning">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                    </div>
+                    <div class="card-value">15%</div>
+                    <div class="card-change negative">
+                        <i class="fas fa-arrow-up"></i> 3% from last week
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Team Engagement</h3>
+                        <div class="card-icon danger">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-value">82%</div>
+                    <div class="card-change negative">
+                        <i class="fas fa-arrow-down"></i> 1.5% from last week
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Digital Twin Section -->
+            <div class="digital-twin-container">
+                <div class="digital-twin-header">
+                    <h3>Digital Twin Visualization</h3>
+                    <div class="chart-filters">
+                        <button class="chart-filter-btn active">All</button>
+                        <button class="chart-filter-btn">Development</button>
+                        <button class="chart-filter-btn">Design</button>
+                        <button class="chart-filter-btn">Marketing</button>
+                    </div>
+                </div>
+                <div class="digital-twin-visualization">
+                    <div class="employee-twin">
+                        <div class="twin-avatar">
+                            <img src="" alt="Employee">
+                            <div class="twin-status high"></div>
+                        </div>
+                        <div class="twin-name">Harshavardan</div>
+                        <div class="twin-score score-high">92 PSI</div>
+                        <div class="twin-metrics">
+                            <div class="twin-metric">
+                                <div class="metric-value">6.2h</div>
+                                <div>Focus</div>
+                            </div>
+                            <div class="twin-metric">
+                                <div class="metric-value">8%</div>
+                                <div>Burnout</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="employee-twin">
+                        <div class="twin-avatar">
+                            <img src="" alt="Employee">
+                            <div class="twin-status high"></div>
+                        </div>
+                        <div class="twin-name">Guru prasath</div>
+                        <div class="twin-score score-high">88 PSI</div>
+                        <div class="twin-metrics">
+                            <div class="twin-metric">
+                                <div class="metric-value">5.8h</div>
+                                <div>Focus</div>
+                            </div>
+                            <div class="twin-metric">
+                                <div class="metric-value">12%</div>
+                                <div>Burnout</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="employee-twin">
+                        <div class="twin-avatar">
+                            <img src="" alt="Employee">
+                            <div class="twin-status medium"></div>
+                        </div>
+                        <div class="twin-name">david joshuA</div>
+                        <div class="twin-score score-medium">75 PSI</div>
+                        <div class="twin-metrics">
+                            <div class="twin-metric">
+                                <div class="metric-value">4.5h</div>
+                                <div>Focus</div>
+                            </div>
+                            <div class="twin-metric">
+                                <div class="metric-value">18%</div>
+                                <div>Burnout</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="employee-twin">
+                        <div class="twin-avatar">
+                            <img src="" alt="Employee">
+                            <div class="twin-status low"></div>
+                        </div>
+                        <div class="twin-name">Dhanush</div>
+                        <div class="twin-score score-low">62 PSI</div>
+                        <div class="twin-metrics">
+                            <div class="twin-metric">
+                                <div class="metric-value">3.2h</div>
+                                <div>Focus</div>
+                            </div>
+                            <div class="twin-metric">
+                                <div class="metric-value">35%</div>
+                                <div>Burnout</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="employee-twin">
+                        <div class="twin-avatar">
+                            <img src="https0" alt="Employee">
+                            <div class="twin-status high"></div>
+                        </div>
+                        <div class="twin-name">ishaq mohamed</div>
+                        <div class="twin-score score-high">90 PSI</div>
+                        <div class="twin-metrics">
+                            <div class="twin-metric">
+                                <div class="metric-value">6.5h</div>
+                                <div>Focus</div>
+                            </div>
+                            <div class="twin-metric">
+                                <div class="metric-value">7%</div>
+                                <div>Burnout</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="employee-twin">
+                        <div class="twin-avatar">
+                            <img src="" alt="Employee">
+                            <div class="twin-status medium"></div>
+                        </div>
+                        <div class="twin-name">sivakarthikeyan </div>
+                        <div class="twin-score score-medium">71 PSI</div>
+                        <div class="twin-metrics">
+                            <div class="twin-metric">
+                                <div class="metric-value">4.1h</div>
+                                <div>Focus</div>
+                            </div>
+                            <div class="twin-metric">
+                                <div class="metric-value">22%</div>
+                                <div>Burnout</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Section -->
+            <div class="chart-row">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Productivity Trends</h3>
+                        <div class="chart-filters">
+                            <button class="chart-filter-btn active">Week</button>
+                            <button class="chart-filter-btn">Month</button>
+                            <button class="chart-filter-btn">Quarter</button>
+                        </div>
+                    </div>
+                    <div class="productivity-chart">
+                        <!-- Chart will be rendered here - in a real implementation, you'd use a JS chart library -->
+                        <img src="/api/placeholder/800/300" alt="Productivity chart placeholder" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--border-radius);">
+                    </div>
+                </div>
+                
+                <div class="alerts-container">
+                    <div class="chart-header">
+                        <h3>Recent Alerts</h3>
+                    </div>
+                    <div class="alert-item">
+                        <div class="alert-icon alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">Burnout Risk Detected</div>
+                            <div class="alert-description">Dwight Schrute has been working overtime for 5 consecutive days.</div>
+                            <div class="alert-time">Today, 10:42 AM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item">
+                        <div class="alert-icon alert-info">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">Productivity Drop</div>
+                            <div class="alert-description">Kevin Malone's productivity score has dropped by 12% this week.</div>
+                            <div class="alert-time">Today, 09:15 AM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item">
+                        <div class="alert-icon alert-success">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">Achievement Unlocked</div>
+                            <div class="alert-description">Michael Scott has completed all assigned tasks ahead of schedule.</div>
+                            <div class="alert-time">Yesterday, 04:30 PM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item">
+                        <div class="alert-icon alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">Focus Time Alert</div>
+                            <div class="alert-description">Jim Halpert's daily focus time is below the target threshold.</div>
+                            <div class="alert-time">Yesterday, 02:18 PM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Section -->
+            <div class="team-section">
+                <div class="section-header">
+                    <h3>Team Members</h3>
+                    <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://i.pravatar.cc/150?img=1" alt="Team Member">
+                        </div>
+                        <div class="status-indicator status-active"></div>
+                        <div class="team-info">
+                            <div class="team-name">Michael Scott</div>
+                            <div class="team-position">Regional Manager</div>
+                            <div class="productivity-bar">
+                                <div class="productivity-value productivity-high"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Team Member">
+                        </div>
+                        <div class="status-indicator status-active"></div>
+                        <div class="team-info">
+                            <div class="team-name">Pam Beesly</div>
+                            <div class="team-position">Receptionist</div>
+                            <div class="productivity-bar">
+                                <div class="productivity-value productivity-high"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://i.pravatar.cc/150?img=8" alt="Team Member">
+                        </div>
+                        <div class="status-indicator status-away"></div>
+                        <div class="team-info">
+                            <div class="team-name">Jim Halpert</div>
+                            <div class="team-position">Sales Representative</div>
+                            <div class="productivity-bar">
+                                <div class="productivity-value productivity-medium"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="Team Member">
+                        </div>
+                        <div class="status-indicator status-dnd"></div>
+                        <div class="team-info">
+                            <div class="team-name">Dwight Schrute</div>
+                            <div class="team-position">Assistant Regional Manager</div>
+                            <div class="productivity-bar">
+                                <div class="productivity-value productivity-low"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="text-align: center; padding: 20px 0; color: var(--neutral-dark); font-size: 0.85rem; border-top: 1px solid var(--neutral-medium); margin-top: 20px;">
+                <p>Digital Twin AI Dashboard &copy; 2025 | Version 1.0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- You would include JavaScript libraries here for charts and interactivity -->
+    <script>
+        // Sample JavaScript for simple interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter buttons
+            const filterButtons = document.querySelectorAll('.chart-filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    parent.querySelector('.active').classList.remove('active');
+                    this.classList.add('active');
+                });
+            });
+            
+            // Notification interaction
+            const notificationBell = document.querySelector('.notification-bell');
+            notificationBell.addEventListener('click', function() {
+                alert('Notification center would open here');
+            });
+        });
+    </script>
+</body>
+</html>
